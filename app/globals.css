@@ -1,26 +1,311 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --font-syne: 'Syne', sans-serif;
+  --font-dm: 'DM Sans', sans-serif;
+  --accent: #19705C;
+  --accent-dim: rgba(25, 112, 92, 0.15);
+  --accent-glow: rgba(25, 112, 92, 0.35);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #000;
+  color: #fff;
+  font-family: var(--font-dm);
+  overflow-x: hidden;
+}
+
+/* ── HERO BACKGROUND ─────────────────────────────── */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(25, 112, 92, 0.1) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(25, 112, 92, 0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 10% 70%, rgba(25, 112, 92, 0.04) 0%, transparent 60%);
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, black 30%, transparent 100%);
+}
+
+.hero-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 128px;
+}
+
+/* ── HERO WORD ANIMATION ──────────────────────────── */
+@keyframes wordEnter {
+  0%   { opacity: 0; transform: scale(0.6); }
+  20%  { opacity: 1; transform: scale(1.08); }
+  40%  { opacity: 1; transform: scale(1); }
+  75%  { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.05); }
+}
+
+@keyframes finalReveal {
+  0%   { opacity: 0; transform: translateY(18px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes subtitleReveal {
+  0%   { opacity: 0; transform: translateY(14px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ctaReveal {
+  0%   { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50%       { transform: translateY(8px); opacity: 1; }
+}
+
+.word-animate {
+  animation: wordEnter 0.6s ease forwards;
+}
+
+.hero-final-enter {
+  animation: finalReveal 0.55s cubic-bezier(0.22,1,0.36,1) forwards;
+}
+
+.hero-subtitle-enter {
+  animation: subtitleReveal 0.55s cubic-bezier(0.22,1,0.36,1) 0.15s forwards;
+  opacity: 0;
+}
+
+.hero-cta-enter {
+  animation: ctaReveal 0.45s cubic-bezier(0.22,1,0.36,1) 0.3s forwards;
+  opacity: 0;
+}
+
+.scroll-bounce {
+  animation: scrollBounce 1.8s ease-in-out infinite;
+}
+
+/* ── SECTION REVEAL (handled inline via JS/IntersectionObserver) ── */
+
+/* ── ACCENT LINE ──────────────────────────────────── */
+.accent-line {
+  display: inline-block;
+  width: 2.5rem;
+  height: 2px;
+  background: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+/* ── CTA BUTTON ───────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-syne);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  padding: 0.85rem 2rem;
+  border-radius: 4px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  white-space: nowrap;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(25, 112, 92, 0.4);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255,255,255,0.7);
+  font-family: var(--font-dm);
+  font-weight: 400;
+  font-size: 0.9rem;
+  padding: 0.85rem 0.25rem;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+
+.btn-secondary:hover {
+  color: #fff;
+  border-color: rgba(255,255,255,0.6);
+}
+
+/* ── FEATURE GRID (2-col zig-zag) ─────────────────── */
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+@media (min-width: 1024px) {
+  .feature-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+  }
+}
+
+/* ── FEATURE CARD / SECTION BORDER ───────────────── */
+.feature-section {
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+/* ── SCREEN PLACEHOLDER ──────────────────────────── */
+.screen-placeholder {
+  background: linear-gradient(135deg, rgba(25,112,92,0.08) 0%, rgba(25,112,92,0.04) 50%, rgba(25,112,92,0.02) 100%);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: rgba(255,255,255,0.3);
+  font-family: var(--font-dm);
+  font-size: 0.8rem;
+}
+
+.screen-placeholder span.label {
+  color: rgba(25,112,92,0.8);
+  font-family: var(--font-syne);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ── ACCORDION ────────────────────────────────────── */
+.accordion-item {
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.accordion-item:last-child {
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.accordion-trigger {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  background: none;
+  border: none;
+  color: #fff;
+  font-family: var(--font-syne);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.accordion-trigger:hover {
+  color: var(--accent);
+}
+
+.accordion-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  color: rgba(255,255,255,0.4);
+}
+
+.accordion-icon.open {
+  transform: rotate(45deg);
+  color: var(--accent);
+}
+
+.accordion-content {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+
+.accordion-content.open {
+  max-height: 400px;
+}
+
+.accordion-body {
+  padding-bottom: 1.25rem;
+  color: rgba(255,255,255,0.55);
+  font-size: 0.92rem;
+  line-height: 1.7;
+  font-family: var(--font-dm);
+}
+
+/* ── NOISE OVERLAY ────────────────────────────────── */
+.section-noise {
+  position: relative;
+}
+.section-noise::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+
+/* ── FOR WHOM CARDS ───────────────────────────────── */
+.for-whom-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 8px;
+  padding: 2rem 1.75rem;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.for-whom-card:hover {
+  border-color: rgba(25,112,92,0.35);
+  background: rgba(25,112,92,0.05);
+}
+
+.for-whom-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  background: rgba(25,112,92,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
 }

@@ -2,24 +2,24 @@
 
 import { useState, useEffect, useRef } from "react";
 
-const WORDS = ["TY", "MASZ", "KONTROLĘ"];
 const WORD_DURATION = 650;
 const WORD_GAP = 60;
 
 interface Props {
   onDone: () => void;
+  words?: string[];
 }
 
-export default function HeroAnimation({ onDone }: Props) {
+const DEFAULT_WORDS = ["TY", "MASZ", "KONTROLĘ"];
+
+export default function HeroAnimation({ onDone, words = DEFAULT_WORDS }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [key, setKey] = useState(0);
-  // Use ref to hold the timeout chain — cleanup on double-invoke (React Strict Mode)
   const startedRef = useRef(false);
   const onDoneRef = useRef(onDone);
   onDoneRef.current = onDone;
 
   useEffect(() => {
-    // Guard against React Strict Mode double-invoke
     if (startedRef.current) return;
     startedRef.current = true;
 
@@ -31,7 +31,7 @@ export default function HeroAnimation({ onDone }: Props) {
       setCurrentIndex(idx);
       setKey(k => k + 1);
       idx++;
-      if (idx < WORDS.length) {
+      if (idx < words.length) {
         setTimeout(showNext, WORD_DURATION + WORD_GAP);
       } else {
         setTimeout(() => {
@@ -41,14 +41,12 @@ export default function HeroAnimation({ onDone }: Props) {
     };
 
     showNext();
-
     return () => { cancelled = true; };
   }, []);
 
-  // font size: clamp ensures "KONTROLĘ" never overflows on narrow screens
-  const fontSize = currentIndex === 2
-    ? "clamp(2.2rem, 10vw, 9rem)"   // KONTROLĘ — narrower
-    : "clamp(3rem, 14vw, 11rem)";   // TY / MASZ — big
+  const fontSize = words[currentIndex]?.length > 7
+    ? "clamp(2.2rem, 10vw, 9rem)"
+    : "clamp(3.5rem, 16vw, 13rem)";
 
   return (
     <div style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "0 1rem" }} aria-hidden="true">
@@ -60,14 +58,14 @@ export default function HeroAnimation({ onDone }: Props) {
           fontWeight: 800,
           fontSize,
           letterSpacing: "-0.03em",
-          color: currentIndex === WORDS.length - 1 ? "var(--accent)" : "#fff",
+          color: currentIndex === words.length - 1 ? "var(--accent)" : "#fff",
           display: "block",
           lineHeight: 1,
           willChange: "transform, opacity",
           whiteSpace: "nowrap",
         }}
       >
-        {WORDS[currentIndex]}
+        {words[currentIndex]}
       </span>
     </div>
   );

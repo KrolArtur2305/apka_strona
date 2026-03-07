@@ -10,28 +10,14 @@ export default function LocaleSwitcher({ currentLocale }: { currentLocale: Local
 
   const switchTo = (locale: Locale) => {
     setOpen(false);
-    router.push(`/${locale}/${i18n[locale].slug}`);
+    router.push(`/${locale}`);
   };
 
   return (
     <div style={{ position: "relative" }}>
       <button
         onClick={() => setOpen(o => !o)}
-        style={{
-          background: "rgba(255,255,255,0.06)",
-          border: "1px solid rgba(255,255,255,0.12)",
-          borderRadius: 6,
-          padding: "0.4rem 0.75rem",
-          color: "#fff",
-          fontSize: "0.82rem",
-          fontFamily: "var(--font-syne)",
-          fontWeight: 600,
-          cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
-          gap: "0.4rem",
-          transition: "background 0.15s",
-        }}
+        style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 6, padding: "0.4rem 0.75rem", color: "#fff", fontSize: "0.82rem", fontFamily: "var(--font-syne)", fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: "0.4rem", transition: "background 0.15s" }}
         onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.1)")}
         onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,255,255,0.06)")}
       >
@@ -42,37 +28,12 @@ export default function LocaleSwitcher({ currentLocale }: { currentLocale: Local
       </button>
 
       {open && (
-        <div style={{
-          position: "absolute",
-          top: "calc(100% + 6px)",
-          right: 0,
-          background: "#111",
-          border: "1px solid rgba(255,255,255,0.1)",
-          borderRadius: 8,
-          overflow: "hidden",
-          minWidth: 140,
-          zIndex: 100,
-          boxShadow: "0 16px 40px rgba(0,0,0,0.5)",
-        }}>
+        <div style={{ position: "absolute", top: "calc(100% + 6px)", right: 0, background: "#111", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 8, overflow: "hidden", minWidth: 140, zIndex: 100, boxShadow: "0 16px 40px rgba(0,0,0,0.5)" }}>
           {locales.map((locale: Locale) => (
             <button
               key={locale}
               onClick={() => switchTo(locale)}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "0.6rem",
-                width: "100%",
-                padding: "0.65rem 1rem",
-                background: locale === currentLocale ? "rgba(25,112,92,0.15)" : "transparent",
-                border: "none",
-                color: locale === currentLocale ? "var(--accent)" : "rgba(255,255,255,0.7)",
-                fontSize: "0.85rem",
-                fontFamily: "var(--font-dm)",
-                cursor: "pointer",
-                textAlign: "left",
-                transition: "background 0.12s",
-              }}
+              style={{ display: "flex", alignItems: "center", gap: "0.6rem", width: "100%", padding: "0.65rem 1rem", background: locale === currentLocale ? "rgba(25,112,92,0.15)" : "transparent", border: "none", color: locale === currentLocale ? "var(--accent)" : "rgba(255,255,255,0.7)", fontSize: "0.85rem", fontFamily: "var(--font-dm)", cursor: "pointer", textAlign: "left", transition: "background 0.12s" }}
               onMouseEnter={e => { if (locale !== currentLocale) e.currentTarget.style.background = "rgba(255,255,255,0.05)"; }}
               onMouseLeave={e => { if (locale !== currentLocale) e.currentTarget.style.background = "transparent"; }}
             >

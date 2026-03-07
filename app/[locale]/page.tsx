@@ -9,6 +9,7 @@ import ScreenImageClient from "@/components/ScreenImageClient";
 import TypewriterQuestions from "@/components/TypewriterQuestions";
 import LocaleAccordion from "@/components/LocaleAccordion";
 import LocaleSwitcher from "@/components/LocaleSwitcher";
+import ContactForm from "@/components/ContactForm";
 
 function ArrowRight({ size = 16 }: { size?: number }) {
   return (
@@ -80,8 +81,8 @@ function FeatureSection({
   );
 }
 
-export default function LocalePage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
-  const { locale, slug } = use(params);
+export default function LocalePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = use(params);
   const [animDone, setAnimDone] = useState(false);
 
   if (!locales.includes(locale as Locale)) {
@@ -91,10 +92,7 @@ export default function LocalePage({ params }: { params: Promise<{ locale: strin
   const config = i18n[locale as Locale];
   const t = config.ui;
 
-  // Validate slug
-  if (slug !== config.slug) {
-    return null;
-  }
+
 
   return (
     <main>
@@ -104,7 +102,7 @@ export default function LocalePage({ params }: { params: Promise<{ locale: strin
 
         <nav style={{ position: "absolute", top: 0, left: 0, right: 0, padding: "1.25rem 1.5rem", display: "flex", alignItems: "center", justifyContent: "space-between", zIndex: 10 }}>
           <span style={{ fontFamily: "var(--font-syne)", fontWeight: 800, fontSize: "1.05rem", letterSpacing: "-0.01em" }}>
-            MyBuild<span style={{ color: "var(--accent)" }}>IQ</span>
+            Build<span style={{ color: "var(--accent)" }}>IQ</span>
           </span>
           <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
             <LocaleSwitcher currentLocale={locale as Locale} />
@@ -114,7 +112,7 @@ export default function LocalePage({ params }: { params: Promise<{ locale: strin
 
         <div style={{ position: "relative", zIndex: 1, textAlign: "center", width: "100%", padding: "0 1.25rem" }}>
           {!animDone ? (
-            <HeroAnimation onDone={() => setAnimDone(true)} />
+            <HeroAnimation onDone={() => setAnimDone(true)} words={t.heroWords} />
           ) : (
             <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
               <h1 className="hero-final-enter" style={{ fontFamily: "var(--font-syne)", fontWeight: 800, fontSize: "clamp(2rem, 7vw, 6rem)", lineHeight: 1.06, letterSpacing: "-0.035em", margin: "0 auto" }}>
@@ -220,13 +218,16 @@ export default function LocalePage({ params }: { params: Promise<{ locale: strin
         </div>
       </section>
 
+      {/* CONTACT */}
+      <ContactForm labels={t.contact} />
+
       {/* FINAL CTA */}
       <section id="cta" className="section-noise" style={{ borderTop: "1px solid rgba(255,255,255,0.06)", background: "radial-gradient(ellipse 80% 60% at 50% 100%, rgba(25,112,92,0.08) 0%, transparent 65%)" }}>
         <div style={{ maxWidth: "44rem", margin: "0 auto", padding: "6rem 1.5rem", textAlign: "center" }}>
           <Reveal>
             <p style={{ fontFamily: "var(--font-syne)", fontWeight: 700, fontSize: "0.72rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--accent)", marginBottom: "1.25rem" }}>{t.ctaLabel}</p>
             <h2 style={{ fontFamily: "var(--font-syne)", fontWeight: 800, fontSize: "clamp(2rem, 5vw, 3.5rem)", lineHeight: 1.1, letterSpacing: "-0.03em", marginBottom: "1.25rem" }}>
-              {t.ctaHeading}<br /><span style={{ color: "var(--accent)" }}>MyBuildIQ.</span>
+              {t.ctaHeading}<br /><span style={{ color: "var(--accent)" }}>BuildIQ.</span>
             </h2>
             <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "clamp(0.95rem, 1.5vw, 1rem)", lineHeight: 1.7, maxWidth: "36ch", margin: "0 auto 2.5rem" }}>{t.ctaBody}</p>
             <a href="#" className="btn-primary" style={{ fontSize: "clamp(0.9rem, 2vw, 1rem)", padding: "0.9rem 2rem" }}>
@@ -241,9 +242,9 @@ export default function LocalePage({ params }: { params: Promise<{ locale: strin
       <footer style={{ borderTop: "1px solid rgba(255,255,255,0.05)", padding: "2rem 1.5rem" }}>
         <div style={{ maxWidth: "72rem", margin: "0 auto", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: "1rem", color: "rgba(255,255,255,0.25)", fontSize: "0.78rem" }}>
           <span style={{ fontFamily: "var(--font-syne)", fontWeight: 700, color: "rgba(255,255,255,0.4)" }}>
-            MyBuild<span style={{ color: "rgba(25,112,92,0.8)" }}>IQ</span>
+            Build<span style={{ color: "rgba(25,112,92,0.8)" }}>IQ</span>
           </span>
-          <span>© {new Date().getFullYear()} MyBuildIQ. {t.footerRights}</span>
+          <span>© {new Date().getFullYear()} BuildIQ. {t.footerRights}</span>
           <div style={{ display: "flex", gap: "1.25rem" }}>
             <a href="#" style={{ color: "inherit", transition: "color 0.15s" }} onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.6)")} onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.25)")}>{t.footerPrivacy}</a>
             <a href="#" style={{ color: "inherit", transition: "color 0.15s" }} onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.6)")} onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.25)")}>{t.footerContact}</a>

@@ -364,3 +364,15 @@ body {
     overflow-x: hidden;
   }
 }
+
+/* ── CONTACT FORM ─────────────────────────────────── */
+.contact-row {
+  display: flex;
+  gap: 1.25rem;
+}
+
+@media (max-width: 600px) {
+  .contact-row {
+    flex-direction: column;
+  }
+}

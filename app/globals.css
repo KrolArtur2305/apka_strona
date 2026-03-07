@@ -112,6 +112,11 @@ body {
   animation: scrollBounce 1.8s ease-in-out infinite;
 }
 
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
 /* ── SECTION REVEAL (handled inline via JS/IntersectionObserver) ── */
 
 /* ── ACCENT LINE ──────────────────────────────────── */
@@ -285,27 +290,77 @@ body {
   background-size: 200px;
 }
 
+/* ── FOR WHOM GRID (responsive 3-col) ────────────── */
+.for-whom-grid-responsive {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 700px) {
+  .for-whom-grid-responsive {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
 /* ── FOR WHOM CARDS ───────────────────────────────── */
 .for-whom-card {
   background: rgba(255,255,255,0.02);
   border: 1px solid rgba(255,255,255,0.07);
   border-radius: 8px;
-  padding: 2rem 1.75rem;
-  transition: border-color 0.2s ease, background 0.2s ease;
+  padding: 2.5rem 2rem;
+  transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .for-whom-card:hover {
-  border-color: rgba(25,112,92,0.35);
-  background: rgba(25,112,92,0.05);
+  border-color: rgba(25,112,92,0.7);
+  background: rgba(25,112,92,0.12);
+  box-shadow: 0 0 40px rgba(25,112,92,0.2), inset 0 0 30px rgba(25,112,92,0.06);
 }
 
 .for-whom-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 6px;
-  background: rgba(25,112,92,0.15);
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  background: rgba(25,112,92,0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1rem;
-  font-size: 1.2rem;
+  margin: 0 auto 1.25rem;
+  font-size: 1.5rem;
+}
+
+/* ── MOBILE OVERRIDES (≤480px) ────────────────────── */
+@media (max-width: 480px) {
+  /* Feature grid: single col on small phones */
+  .feature-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem;
+  }
+
+  /* Reset order on mobile so text always comes first */
+  .feature-grid > div {
+    order: unset !important;
+  }
+
+  /* Nav button smaller */
+  .btn-primary {
+    font-size: 0.78rem;
+    padding: 0.5rem 0.9rem;
+    white-space: nowrap;
+  }
+
+  /* Accordion text */
+  .accordion-trigger {
+    font-size: 0.92rem;
+  }
+
+  /* Prevent horizontal scroll */
+  section, footer, nav {
+    overflow-x: hidden;
+  }
 }

@@ -105,7 +105,7 @@ export async function generateMetadata({
     },
     verification: {
       // Add your Google Search Console verification token here
-      // google: "your-verification-token",
+      // google: "zTzsNIUPBRN-DRZR-O_nO7oP-BjZ7ka4ZO4_YYg9Ta8",
     },
     other: {
       "apple-mobile-web-app-capable": "yes",

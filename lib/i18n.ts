@@ -89,7 +89,7 @@ export const i18n: Record<Locale, LocaleConfig> = {
     seo: {
       title: "BuildIQ – Aplikacja do zarządzania budową domu",
       description: "Zarządzaj budżetem, dokumentami i postępami budowy w jednym miejscu. Koniec z chaosem. Aplikacja dla inwestorów indywidualnych budujących dom.",
-      keywords: ["aplikacja do zarządzania budową", "budowa domu aplikacja", "kontrola budżetu budowy", "inwestor indywidualny", "zarządzanie dokumentami budowa"],
+      keywords: ["aplikacja do zarządzania budową", "budowa domu aplikacja", "kontrola budżetu budowy", "inwestor indywidualny", "zarządzanie dokumentami budowa", "aplikacja dla budującego dom", "harmonogram budowy", "koszty budowy domu", "dziennik budowy aplikacja", "zarządzanie wykonawcami budowa", "budowa systemem gospodarczym", "aplikacja budowlana android", "kontrola budowy domu"],
       ogLocale: "pl_PL",
       h1: "Przejmij kontrolę nad swoją budową",
       h2Budget: "Wiesz ile wydałeś. Wiesz ile zostało.",
@@ -175,7 +175,7 @@ export const i18n: Record<Locale, LocaleConfig> = {
     seo: {
       title: "BuildIQ – Construction Management App for Home Builders",
       description: "Manage your construction budget, documents and progress in one place. Stop the chaos. The app for individual home builders and self-build projects.",
-      keywords: ["construction management app", "home building app", "self build management", "construction budget tracker", "building project app"],
+      keywords: ["construction management app", "home building app", "self build management", "construction budget tracker", "building project app", "home construction app", "diy home build app", "construction project manager", "residential construction app", "home builder software", "construction budget app", "building site management", "owner builder app", "construction progress tracker", "home renovation management app"],
       ogLocale: "en_US",
       h1: "Take control of your construction project",
       h2Budget: "Know what you've spent. Know what's left.",
@@ -261,7 +261,7 @@ export const i18n: Record<Locale, LocaleConfig> = {
     seo: {
       title: "BuildIQ – Bauprojekt Management App für Hausbau",
       description: "Budget, Dokumente und Baufortschritt an einem Ort verwalten. Schluss mit dem Chaos. Die App für private Bauherren.",
-      keywords: ["bauprojekt management app", "hausbau app", "baubudget verwalten", "bauprojekt software", "privatbauherr app"],
+      keywords: ["bauprojekt management app", "hausbau app", "baubudget verwalten", "bauprojekt software", "privatbauherr app", "hausbau kosten app", "bautagebuch app", "selbstbau haus app", "bauprojekt koordination", "hausbau dokumente verwalten", "baukosten tracker", "bauprojekt fortschritt", "bauherr app android"],
       ogLocale: "de_DE",
       h1: "Übernehmen Sie die Kontrolle über Ihr Bauprojekt",
       h2Budget: "Sie wissen, was ausgegeben wurde. Was noch übrig ist.",
@@ -347,7 +347,7 @@ export const i18n: Record<Locale, LocaleConfig> = {
     seo: {
       title: "BuildIQ – App for byggeprosjekt og boligbygging",
       description: "Administrer budsjett, dokumenter og byggefremdrift på ett sted. Slutt på kaos. Appen for private byggherrer.",
-      keywords: ["byggeprosjekt app", "boligbygging app", "byggebudsjett", "selvbygger app", "byggeprosjekt administrasjon"],
+      keywords: ["byggeprosjekt app", "boligbygging app", "byggebudsjett", "selvbygger app", "byggeprosjekt administrasjon", "husbygging app", "bygge hus app", "byggeprosjekt tracker", "byggebudsjett app", "byggedagbok app", "boligprosjekt styring", "byggeprosjekt dokumenter", "privat byggherre app"],
       ogLocale: "nb_NO",
       h1: "Ta kontroll over byggeprosjektet ditt",
       h2Budget: "Vet hva du har brukt. Vet hva som er igjen.",
@@ -433,7 +433,7 @@ export const i18n: Record<Locale, LocaleConfig> = {
     seo: {
       title: "BuildIQ – Application de gestion de chantier pour particuliers",
       description: "Gérez votre budget, vos documents et l'avancement de votre chantier en un seul endroit. Fini le chaos. L'appli pour les maîtres d'ouvrage particuliers.",
-      keywords: ["application gestion chantier", "app construction maison", "suivi budget construction", "maître ouvrage particulier", "gestion documents chantier"],
+      keywords: ["application gestion chantier", "app construction maison", "suivi budget construction", "maître ouvrage particulier", "gestion documents chantier", "application chantier maison", "suivi travaux maison", "budget construction maison", "journal chantier application", "gestion projet construction", "application maître ouvrage", "suivi avancement chantier", "app construction individuelle"],
       ogLocale: "fr_FR",
       h1: "Prenez le contrôle de votre chantier",
       h2Budget: "Savoir ce que vous avez dépensé. Ce qu'il reste.",

@@ -31,9 +31,13 @@ export default function ContactForm({ labels: l }: Props) {
   const handleSubmit = async () => {
     if (!form.name || !form.email || !form.message) return;
     setStatus("sending");
-    // Replace with your actual endpoint (e.g. Resend, Formspree, EmailJS)
     try {
-      await new Promise(r => setTimeout(r, 1200)); // simulate send
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error("Failed");
       setStatus("success");
       setForm({ name: "", email: "", phone: "", message: "" });
     } catch {

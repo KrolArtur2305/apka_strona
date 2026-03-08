@@ -83,17 +83,18 @@ function FeatureSection({
 
 export default function LocalePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = use(params);
-  const [animDone, setAnimDone] = useState(false);
 
   if (!locales.includes(locale as Locale)) {
     return null;
   }
 
-  const config = i18n[locale as Locale];
+  return <LocalePageInner key={locale} locale={locale as Locale} />;
+}
+
+function LocalePageInner({ locale }: { locale: Locale }) {
+  const [animDone, setAnimDone] = useState(false);
+  const config = i18n[locale];
   const t = config.ui;
-
-
-
   return (
     <main>
       {/* HERO */}
@@ -101,9 +102,12 @@ export default function LocalePage({ params }: { params: Promise<{ locale: strin
         <div className="hero-bg"><div className="hero-grid" /><div className="hero-noise" /></div>
 
         <nav style={{ position: "absolute", top: 0, left: 0, right: 0, padding: "1.25rem 1.5rem", display: "flex", alignItems: "center", justifyContent: "space-between", zIndex: 10 }}>
-          <span style={{ fontFamily: "var(--font-syne)", fontWeight: 800, fontSize: "1.05rem", letterSpacing: "-0.01em" }}>
-            Build<span style={{ color: "var(--accent)" }}>IQ</span>
-          </span>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+            <img src="/logo.png" alt="BuildIQ logo" style={{ height: 42, width: "auto" }} />
+            <span style={{ fontFamily: "var(--font-syne)", fontWeight: 800, fontSize: "1.25rem", letterSpacing: "-0.01em" }}>
+              Build<span style={{ color: "var(--accent)" }}>IQ</span>
+            </span>
+          </div>
           <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
             <LocaleSwitcher currentLocale={locale as Locale} />
             <a href="#cta" className="btn-primary" style={{ padding: "0.5rem 1rem", fontSize: "0.8rem" }}>{t.navCta}</a>
@@ -233,7 +237,6 @@ export default function LocalePage({ params }: { params: Promise<{ locale: strin
             <a href="#" className="btn-primary" style={{ fontSize: "clamp(0.9rem, 2vw, 1rem)", padding: "0.9rem 2rem" }}>
               {t.ctaBtn} <ArrowRight size={16} />
             </a>
-            <p style={{ color: "rgba(255,255,255,0.25)", fontSize: "0.78rem", marginTop: "1.25rem" }}>{t.ctaNote}</p>
           </Reveal>
         </div>
       </section>
@@ -241,14 +244,14 @@ export default function LocalePage({ params }: { params: Promise<{ locale: strin
       {/* FOOTER */}
       <footer style={{ borderTop: "1px solid rgba(255,255,255,0.05)", padding: "2rem 1.5rem" }}>
         <div style={{ maxWidth: "72rem", margin: "0 auto", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: "1rem", color: "rgba(255,255,255,0.25)", fontSize: "0.78rem" }}>
-          <span style={{ fontFamily: "var(--font-syne)", fontWeight: 700, color: "rgba(255,255,255,0.4)" }}>
-            Build<span style={{ color: "rgba(25,112,92,0.8)" }}>IQ</span>
-          </span>
-          <span>© {new Date().getFullYear()} BuildIQ. {t.footerRights}</span>
-          <div style={{ display: "flex", gap: "1.25rem" }}>
-            <a href="#" style={{ color: "inherit", transition: "color 0.15s" }} onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.6)")} onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.25)")}>{t.footerPrivacy}</a>
-            <a href="#" style={{ color: "inherit", transition: "color 0.15s" }} onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.6)")} onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.25)")}>{t.footerContact}</a>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+            <img src="/logo.png" alt="BuildIQ logo" style={{ height: 24, width: "auto", opacity: 0.6 }} />
+            <span style={{ fontFamily: "var(--font-syne)", fontWeight: 700, color: "rgba(255,255,255,0.4)" }}>
+              Build<span style={{ color: "rgba(25,112,92,0.8)" }}>IQ</span>
+            </span>
           </div>
+          <span>© {new Date().getFullYear()} BuildIQ. {t.footerRights}</span>
+          <a href="#kontakt" style={{ color: "inherit", transition: "color 0.15s" }} onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.6)")} onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.25)")}>{t.footerContact}</a>
         </div>
       </footer>
     </main>

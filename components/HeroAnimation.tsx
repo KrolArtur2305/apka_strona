@@ -20,6 +20,13 @@ export default function HeroAnimation({ onDone, words = DEFAULT_WORDS }: Props) 
   onDoneRef.current = onDone;
 
   useEffect(() => {
+    // Reset and restart when words change (locale switch)
+    startedRef.current = false;
+    setCurrentIndex(0);
+    setKey(0);
+  }, [words]);
+
+  useEffect(() => {
     if (startedRef.current) return;
     startedRef.current = true;
 

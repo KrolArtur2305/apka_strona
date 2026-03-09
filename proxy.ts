@@ -1,10 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { locales, defaultLocale } from "./lib/i18n";
 
+const staticPaths = ["/privacy", "/terms", "/support"];
+
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  if (pathname.startsWith("/_next") || pathname.startsWith("/api") || pathname.includes(".")) {
+  if (
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/api") ||
+    pathname.includes(".") ||
+    staticPaths.includes(pathname)
+  ) {
     return NextResponse.next();
   }
 

@@ -11,6 +11,14 @@ import LocaleAccordion from "@/components/LocaleAccordion";
 import LocaleSwitcher from "@/components/LocaleSwitcher";
 import ContactForm from "@/components/ContactForm";
 
+const navLoginLabel: Record<Locale, string> = {
+  pl: "Zaloguj",
+  en: "Log in",
+  de: "Anmelden",
+  no: "Logg inn",
+  sv: "Logga in",
+};
+
 function ArrowRight({ size = 16 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 16 16" fill="none">
@@ -110,7 +118,13 @@ function LocalePageInner({ locale }: { locale: Locale }) {
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
             <LocaleSwitcher currentLocale={locale as Locale} />
-            <a href="#cta" className="btn-primary" style={{ padding: "0.5rem 1rem", fontSize: "0.8rem" }}>{t.navCta}</a>
+            <a
+              href="https://app.mybuildiq.com/login"
+              className="btn-primary"
+              style={{ padding: "0.5rem 1rem", fontSize: "0.8rem" }}
+            >
+              {navLoginLabel[locale]}
+            </a>
           </div>
         </nav>
 
